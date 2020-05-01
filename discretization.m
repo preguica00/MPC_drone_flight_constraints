@@ -39,7 +39,7 @@ end
 
 % x = y(id_x);
 % z = y(id_z);
-
-c=[];
+% c=[];
+c=vecnorm(abs(theta)-pi/9);
 % c = [sum(radius) - vecnorm([x';z']-obj_coord);(abs(theta)-20)'];
 end

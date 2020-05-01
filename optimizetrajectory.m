@@ -17,15 +17,11 @@
         optimum = zeros(8*H,1);
     end
 
-opts = optimset('Display','iter','Algorithm','interior-point', 'MaxIter', 10000, 'MaxFunEvals', 10000);
+opts = optimset('Display','iter','Algorithm','interior-point', 'MaxIter', 30000, 'MaxFunEvals', 30000);
 
 
-    %(20/180)pi=pi/9
-    lb = [-15,-60,0,0,-20*pi/180,0,0,-700];
-    ub = [20,30,60,60,20*pi/180,30,30,300];
-% lb=[];
-% ub=[];
-   [optimum, ~] = fmincon(@(y)costfunction(y, H), optimum,[],[],[],[],lb,ub,@(y)discretization(y,x_init,z_init,theta_init,xvelocity_init,zvelocity_init,angvelocity_init),opts);
+
+   [optimum, ~] = fmincon(@(y)costfunction(y, H), optimum,[],[],[],[],[],[],@(y)discretization(y,x_init,z_init,theta_init,xvelocity_init,zvelocity_init,angvelocity_init),opts);
    
    u1_optimum = optimum(id_u1);
    u2_optimum = optimum(id_u2);

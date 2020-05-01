@@ -4,8 +4,8 @@ function dydt = quadcopter_ode(t,y,u,g)
 [mass,inertia_moment,arm_moment,gravitational_acceleration_controller,gravitational_acceleration_model] = parameters;
 %parameters
 tau = 5*10^(-3);
-fmax=100;
-alpha = fmax;
+fmax=mass*gravitational_acceleration_model;
+alpha = 1/fmax;
 %% Unpack the state and input vectors
 
     position_x= y(1);
@@ -16,7 +16,8 @@ alpha = fmax;
     velocity_pitch= y(6);
 %     f1 = y(7); ?
 %     f2 = y(8); ? 
-    
+%u1=f1-f1;
+%u2=f1+f2;
     diff_mode  = u(1);
     common_mode = u(2);
 
@@ -28,7 +29,8 @@ z_acceleration = g -(1/mass)*cos(pitch)* common_mode;
 pitch_acceleration = (arm_moment/inertia_moment)*diff_mode;
 
 %%Equations of thrust forces
-% f1_velocity = -1/tau* f1 + alpha/tau * [diff_mode; common_mode]';
+%throttle_ref = alpha*[u1 u2]';
+% f1_velocity = -1/tau* f1 + throttle_ref/tau';
 % f2_velocity = -1/tau* f2 + alpha/tau * [diff_mode; common_mode]';
 %% 
 %dydt(1)= velocity_x;

@@ -13,7 +13,7 @@ function simulate()
     xlim([0 60])
     ylim([0 60])
     
-    current_state = [0; 0;0;0;0;0];
+    current_state = [0;0;0;0;0;0];
     current_MPC_solution = [];
     
     [H,Ts,id_u1, id_u2,id_x,id_z,id_theta,id_dotx,id_dotz,id_dottheta] = drone_info;
